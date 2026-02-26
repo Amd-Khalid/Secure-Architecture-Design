@@ -25,3 +25,15 @@ In order to be able to accurately model threats, the architecture is divided wit
 - Azure Trust Boundary (Data Isolation): The strict access boundary which separates application logic (microservices) from the data storage (Azure SQL Database)
 
 **Architecture Diagram**
+<img width="1531" height="632" alt="Architecture Diagram" src="https://github.com/user-attachments/assets/b1f57122-4a32-4362-a9be-fb06a569e26f" />
+
+## Asset Identification & Security Objectives
+
+The system's critical assets are labelled and mapped directly to the CIA Triad.
+
+| Critical Asset | Description | Primary Security Objective(s) | Justification |
+| :--- | :--- | :--- | :--- |
+| **User Credentials & Tokens** | Passwords, session cookies, and authentication tokens. | Confidentiality | Unauthorized access leads to complete account compromise and system-wide impersonation. |
+| **Academic Records** | Student grades, transcripts, and attendance logs. | Integrity & Confidentiality | Grades must be protected from unauthorized tampering; student privacy must be strictly upheld. |
+| **Financial & Salary Data** | Student fee payments and faculty payroll information. | Integrity & Confidentiality | Requires transaction checks to prevent fraud and strict access controls to prevent data leaks. |
+| **LMS Platform & Files** | Course materials, quizzes, and assignment uploads. | Availability | System disruptions prevent students from meeting critical academic deadlines and accessing essential study resources. |
