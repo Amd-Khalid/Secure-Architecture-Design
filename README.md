@@ -65,3 +65,20 @@ The threat model was created using the STRIDE methodology, risk was determined b
 - Monitoring and Logging:
   - Log all security events including access control failures, authentication attempts and system exceptions. And ensure logs contain timestamps as well as user identities.
 
+## Risk Treatment and Residual Risk
+
+| Threat | Treatment Strategy | Applied Control / Action |
+| :--- | :--- | :--- |
+| **Spoofing (Session Hijacking)** | **Mitigate** | Enforce secure, HTTPOnly flags on cookies and implement short-lived session timeouts. Require multi-factor authentication (MFA) for Admin/Faculty. |
+| **Tampering (Attendance Data)** | **Mitigate** | Implement strict input validation at the Web Server and enforce TLS to prevent Man-in-the-Middle (MitM) tampering. |
+| **Information Disclosure (IDOR)** | **Mitigate** | Implement robust object-level authorization checks ensuring users can only access their own UUID-bound data. |
+| **Denial of Service (DDoS)** | **Transfer** | Route public traffic through a cloud-based Web Application Firewall (WAF) to absorb volumetric attacks. |
+| **Elevation of Privilege** | **Mitigate** | Segregate privilege logic from other code and restrict access to protected URLs at the backend tier. |
+
+## Residual Risk
+
+Even after we transfer the risk of a DDoS attack to a WAF provider, the residual risk of an Application-Layer (layer 7) Denial of Service remains. If an attacker slowly gets through backend database connection pools using requests that look legitimate, the systems availability might degrade.
+
+## Justification for Acceptance:
+
+Building a very resilient, globally distributed backend to handle these localized layer 7 attacks would be too costly from a financial perspective for a standard university budget. Hence we accept this residual risk because the cost of maintaining this availability outweighs the impact of brief, intermittent downtime.
