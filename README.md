@@ -51,3 +51,17 @@ The threat model was created using the STRIDE methodology, risk was determined b
 | **Denial of Service** | Absorbing a services necessary resources. A botnet floods the Web Server during final exam week, exhausting resources and crashing the portal. | Loss of availability; severe disruption to university operations. | **High** |
 | **Elevation of Privilege** | Allowing someone to do something that they're not authorized to do. A standard student user exploits an API misconfiguration to grant themselves Registrar/Admin permissions. | Complete system compromise; ability to modify any academic or financial record. | **High** |
 
+## Secure Architecture Controls
+
+- Identity and Access Management (IAM):
+  - Implement "deny by default" authorization across all API endpoints.
+  - Enfroce strict Role-Based Access Control at the microservice level in order to ensure the system is only accessed by authorized users.
+- Data Protection & Cryptography:
+  - Protect data in transit using TLS for all communications which cross the Remote User Zone.
+  - Utilize AES-256 for encypting very sensitive data at rest, like financial transaction logs.
+  - Hash all passwords using algorithms like SHA-256 combined with unique salts.
+- Input Validation:
+  - All data coming from untrusted external browsers should be strictly validated and encoded at the Web Server in order to prevent any injection flaws (OWASP AO3)
+- Monitoring and Logging:
+  - Log all security events including access control failures, authentication attempts and system exceptions. And ensure logs contain timestamps as well as user identities.
+
